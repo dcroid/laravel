@@ -9,10 +9,10 @@ class UserController extends BaseController {
 	 */
 	public function index()
 	{
+		$data = User::paginate(15);
 
-        return View::make('users.index');
+		return View::make('users.index')->with('users', $data);
 	}
-
 	/**
 	 * Show the form for creating a new resource.
 	 *
@@ -52,18 +52,35 @@ class UserController extends BaseController {
 	 */
 	public function edit($id)
 	{
-        return View::make('users.edit');
+		$data = User::findOrFail($id);
+        return View::make('users.edit')->with('user', $data);
 	}
 
 	/**
 	 * Update the specified resource in storage.
 	 *
-	 * @param  int  $id
 	 * @return Response
 	 */
-	public function update($id)
+	public function update()
 	{
-		//
+		$date = Input::all();
+
+		//TODO валидатор
+
+		$user = User::findOrFail($date['id']);
+		$user->email = $date['email'];
+
+		if(!empty($data['password']))
+			$user->password = $date['password'];
+
+		try{
+			$user->save();
+			return Redirect::to('/user')->with('message', 'Пользователь успешно обновлен');
+		} catch (Exception $e){
+
+			return 'error';
+		}
+
 	}
 
 	/**
@@ -74,7 +91,17 @@ class UserController extends BaseController {
 	 */
 	public function destroy($id)
 	{
-		//
+		$id = (int)$id;
+
+			$user = User::findOrFail($id);
+
+		if($user){
+			$user->delete();
+			return Redirect::to('/user')->with('message', 'Пользователь удален');
+		}
+
+
+		return 'null';
 	}
 
 

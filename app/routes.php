@@ -40,14 +40,15 @@ Route::group(['prefix'=>'/user'], function(){
     Route::get('/', 'UserController@index');
     Route::get('/{id}', 'UserController@edit');
     Route::post('/{id}', 'UserController@update');
-    Route::post('/del/{id}', 'UserController@update');
+    Route::get('/delete/{id}', 'UserController@destroy');
 });
+
 
 /** Urls */
 Route::group(['prefix'=>'/url'], function(){
     Route::get('/', 'UrlController@index');
     Route::get('/{id}', 'UrlController@show');
-    Route::get('/delete/{id}', 'UrlController@');
+    Route::get('/delete/{id}', 'UrlController@destroy');
     Route::get('/edit/{id}', 'UrlController@edit');
     Route::post('/edit/{id}', 'UrlController@update');
 });
@@ -56,7 +57,7 @@ Route::group(['prefix'=>'/url'], function(){
 /** Adverts */
 Route::group(['prefix'=>'/advert'], function(){
     Route::get('/{id}', 'AdvertController@show');
-    Route::get('/delete/{id}','AdvertController@');
+    Route::get('/delete/{id}','AdvertController@destroy');
 });
 
 
