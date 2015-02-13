@@ -13,6 +13,50 @@
 
 
 
-Route::get('/', function () {
+Route::get('/login', function () {
     return View::make('Login.Login');
 });
+
+Route::post('/login', 'UserController@enter');
+
+
+
+Route::get('/logout', function () {
+    return View::make('Login.Login');
+});
+
+Route::get('/', function () {
+
+    if(Auth::check())
+        return Redirect::to('/url');
+    else
+        return Redirect::to('/login');
+
+});
+
+
+/** Users */
+Route::group(['prefix'=>'/user'], function(){
+    Route::get('/', 'UserController@index');
+    Route::get('/{id}', 'UserController@edit');
+    Route::post('/{id}', 'UserController@update');
+    Route::post('/del/{id}', 'UserController@update');
+});
+
+/** Urls */
+Route::group(['prefix'=>'/url'], function(){
+    Route::get('/', 'UrlController@index');
+    Route::get('/{id}', 'UrlController@show');
+    Route::get('/delete/{id}', 'UrlController@');
+    Route::get('/edit/{id}', 'UrlController@edit');
+    Route::post('/edit/{id}', 'UrlController@update');
+});
+
+
+/** Adverts */
+Route::group(['prefix'=>'/advert'], function(){
+    Route::get('/{id}', 'AdvertController@show');
+    Route::get('/delete/{id}','AdvertController@');
+});
+
+

@@ -1,7 +1,7 @@
 <?php
 /**
  * An helper file for Laravel 4, to provide autocomplete information to your IDE
- * Generated for Laravel 4.2.16 on 2015-02-05.
+ * Generated for Laravel 4.2.17 on 2015-02-13.
  *
  * @author Barry vd. Heuvel <barryvdh@gmail.com>
  * @see https://github.com/barryvdh/laravel-ide-helper
@@ -3563,6 +3563,20 @@ namespace {
         }
         
         /**
+         * Add a "where date" statement to the query.
+         *
+         * @param string $column
+         * @param string $operator
+         * @param int $value
+         * @param string $boolean
+         * @return \Illuminate\Database\Query\Builder|static 
+         * @static 
+         */
+        public static function whereDate($column, $operator, $value, $boolean = 'and'){
+            return \Illuminate\Database\Query\Builder::whereDate($column, $operator, $value, $boolean);
+        }
+        
+        /**
          * Add a "where day" statement to the query.
          *
          * @param string $column
@@ -4395,11 +4409,12 @@ namespace {
          *
          * @param string $path
          * @param string $contents
+         * @param bool $lock
          * @return int 
          * @static 
          */
-        public static function put($path, $contents){
-            return \Illuminate\Filesystem\Filesystem::put($path, $contents);
+        public static function put($path, $contents, $lock = false){
+            return \Illuminate\Filesystem\Filesystem::put($path, $contents, $lock);
         }
         
         /**
@@ -4825,6 +4840,7 @@ namespace {
          * Create a number input field.
          *
          * @param string $name
+         * @param string|null $value
          * @param array $options
          * @return string 
          * @static 
@@ -7055,7 +7071,7 @@ namespace {
          * Register an error_log handler.
          *
          * @param string $level
-         * @param integer $messageType
+         * @param int $messageType
          * @return void 
          * @static 
          */

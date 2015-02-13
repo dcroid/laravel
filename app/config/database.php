@@ -55,7 +55,7 @@ return array(
 		'mysql' => array(
 			'driver'    => 'mysql',
 			'host'      => 'localhost',
-			'database'  => 'laravel_app',
+			'database'  => 'avito_samid',
 			'username'  => 'root',
 			'password'  => 'BuhsO123',
 			'charset'   => 'utf8',
